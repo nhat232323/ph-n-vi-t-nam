@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp 20/10</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffe6f2;
+            overflow: hidden;
+        }
+        .container {
+            perspective: 1000px;
+        }
+        .card {
+            width: 300px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: rotateY(180deg);
+        }
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            background-color: #ff69b4;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backface-visibility: hidden;
+            color: #fff;
+            text-align: center;
+        }
+        .back {
+            transform: rotateY(180deg);
+            overflow: hidden;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            opacity: 0;
+            animation: fall 5s infinite;
+        }
+        @keyframes fall {
+            0% { top: -10%; opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        p {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+<audio id="background-music" loop>
+    <source src="https://www.nhaccuatui.com/playlist/ballad-viet-various-artists.aEINaIMf6iFi.html?st=3/music.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ audio.
+</audio>
+
+<div class="container">
+    <div class="card" id="card">
+        <div class="front">
+            <h1>Chúc Mừng</h1>
+            <h1>Ngày 20/10!</h1>
+        </div>
+        <div class="back">
+            <h1>Lời Chúc</h1>
+            <p>T ông trùm mafia intelnet chúc tụi bây sức khoẻ gia đình bình an chúc con đường tập của bây càng ngày càng gặp nhiều may mắn 8386 tụi bây nhá,</p>
+            <p>!</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        heart.style.fontSize = (Math.random() * 10 + 20) + 'px'; // Kích thước ngẫu nhiên
+        document.body.appendChild(heart);
+        
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+
+    // Tạo trái tim khi mở thiệp
+    document.getElementById('card').addEventListener('mouseover', () => {
+        createHeart();
+        document.getElementById('background-music').play(); // Bắt đầu phát nhạc khi mở thiệp
+    });
+
+    setInterval(createHeart, 300); // Tạo trái tim liên tục
+</script>
+
+</body>
+</html>
